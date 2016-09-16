@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Unicat</title>
+	<title>Table Editor</title>
+
+	<!-- JQuery -->
+	<script src="/js/jquery.min.js"></script>
+
+	<!-- Rivets -->
+	<script src="/js/rivets.bundled.min.js"></script>
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
@@ -10,8 +16,70 @@
 
 	<!-- App -->
 	<script src="/js/app.js"></script>
+	<link rel="stylesheet" href="/css/style.css">
+
 </head>
 <body>
--=Table Editor=-
+
+	<div class='container-fluid' id="DataJSON">
+		<div class='row'>
+			<div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>
+				<h3>Insert JSON data</h3>
+				<hr>
+				<textarea id="InsertData" class="form-control" rv-value="data.insert"></textarea>
+				<button id="InsertButton" class="btn btn-default">Insert data!</button>
+				<button id="GetButton" class="btn btn-default">Get data!</button>
+				<br><br>
+				<h3>Upload file with data</h3>
+				<hr>
+				  <form enctype="multipart/form-data" method="post" action="/upload">
+				   <input type="file" name="file" class="form-control">
+				   <input type="submit" value="Upload!" class="btn btn-default">
+				  </form> 
+			</div>
+			<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>
+				<h3>Table editor</h3>
+				<hr>
+
+				<div class='table'>
+					<div class='table-header table-row'>
+						<div class='table-col1'>Name</div>
+						<div class='table-col2'>Value</div>
+						<div class="table-col3">Control</div>
+					</div>
+					<div class='table-body'>
+						<div class="table-data table-row" rv-each-item="data.array">
+							<span class="index" rv-hide="true">{index}</span>
+							<div class="table-col1">
+								<input type="text" rv-value="item.name" class="form-control">
+							</div>
+							<div class="table-col2">
+								<input type="text" rv-value="item.value" class="form-control">
+							</div>
+							<div class="table-col3">
+								<span class="glyphicon glyphicon-arrow-up ItemUp"></span>
+								<span class="glyphicon glyphicon-arrow-down ItemDown"></span>
+								<span class="glyphicon glyphicon-remove ItemRemove"></span>	
+							</div>
+						</div>
+					</div>
+					<br>
+					<h4>Add new item</h4>
+					<div class="table-add table-row">
+						<div class="table-col1">
+							<input type="text" rv-value="data.new_name" class="form-control">
+						</div>
+						<div class="table-col2">
+							<input type="text" rv-value="data.new_value" class="form-control">
+						</div>
+						<div class="table-col3">
+							<button type="button" class="btn btn-success" id="AddItem" rv-on-click="add">Add</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>

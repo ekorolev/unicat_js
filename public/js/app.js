@@ -1,18 +1,12 @@
 
 var local_data = [
-	{ name: "Name1", value: "Value1" },
-	{ name: "Name2223", value: "Value2" },
-	{ name: "Name3", value: "Value3" },
-	{ name: "Name4", value: "Value4" },
-	{ name: "Name5", value: "coming soon"},
-	{ name: "A", value: "B"},
-	{name:"get", value:"started"}
 ];
 
 var AppData = {
 	array: local_data,
 	new_name: null,
-	new_value: null
+	new_value: null,
+	nodata: true
 };
 
 $(function () {
@@ -33,6 +27,7 @@ $(function () {
 				});
 				AppData.new_name = null;
 				AppData.new_value = null;
+				AppData.nodata = false;
 			}
 		}
 	);
@@ -55,6 +50,7 @@ $(function () {
 		} else {
 
 			AppData.array = json_data;
+			if (AppData.array.length>0)AppData.nodata=false;
 		}
 	});
 
@@ -62,6 +58,8 @@ $(function () {
 		var index = $(evt.target).parents(".table-data").find(".index").html();
 
 		AppData.array.splice(index, 1);
+
+		if (AppData.array.length==0) {AppData.nodata = true;}
 	})
 	$("body").on("click", ".ItemUp", function (evt) {
 		var index = $(evt.target).parents(".table-data").find(".index").html();
@@ -85,5 +83,6 @@ $(function () {
 			AppData.array.splice(index, 0, {name: item_name, value: item_value});
 		}
 	})
+
 
 });

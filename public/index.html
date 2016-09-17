@@ -29,13 +29,6 @@
 				<textarea id="InsertData" class="form-control" rv-value="data.insert"></textarea>
 				<button id="InsertButton" class="btn btn-default">Insert data!</button>
 				<button id="GetButton" class="btn btn-default">Get data!</button>
-				<br><br>
-				<h3>Upload file with data</h3>
-				<hr>
-				  <form enctype="multipart/form-data" method="post" action="/upload">
-				   <input type="file" name="file" class="form-control">
-				   <input type="submit" value="Upload!" class="btn btn-default">
-				  </form> 
 			</div>
 			<div class='col-lg-8 col-md-8 col-sm-12 col-xs-12'>
 				<h3>Table editor</h3>
@@ -46,6 +39,11 @@
 						<div class='table-col1'>Name</div>
 						<div class='table-col2'>Value</div>
 						<div class="table-col3">Control</div>
+					</div>
+					<div class="table-big-text" rv-show="data.nodata">
+						<p>Empty table.</p>
+
+						<p>To use Table Editor paste a JSON data in the box to the left or start adding items using the form below.</p>
 					</div>
 					<div class='table-body'>
 						<div class="table-data table-row" rv-each-item="data.array">
